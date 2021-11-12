@@ -1,7 +1,7 @@
 CREATE TABLE properties (
-    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    units TEXT
+    units TEXT,
     img BLOB
 );
 

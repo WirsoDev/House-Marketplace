@@ -7,17 +7,19 @@ const db = require('./db/db')
 app.use(express.json())
 
 
-// get data
 app.get('/all', (req, res) => {
+    // select all itens from db.properties
 
-    // select all itens from db
     db.all(`SELECT * FROM properties`, function(err, rows){
+
         if(err){
             console.log(err)
-            return res.send('404')
+            return res.status('404').send('Something go wrong!')
         }
+
+        let data = rows
         console.log(rows)
-        return res.send('Send!')
+        return res.json(data)
     })
 })
 

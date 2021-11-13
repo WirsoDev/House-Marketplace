@@ -1,24 +1,52 @@
-const express = require('express')
-const app = express()
-const db = require('./db/db')
+import Express from 'express'
+const app = Express()
 
+import { openDb } from './db.js'
+import { allProperties, addPropertie } from './db/models/properties.js'
 
 // server config
-app.use(express.json())
+app.use(Express.json())
 
 
+// Routes
+
+app.get('/', (req, res) => {
+    //ping
+    res.json({
+        "message": "live",
+    })
+})
+
+
+app.get('/all', async function (req, res) {
+    // Get all properties from db
+    let properties = await allProperties()
+    res.json({
+        properties
+    })
+})
+
+
+app.post('/add', (req, res) => {
+    //add properties to db
+    let data = req.body
+    console.log(data)
+    addPropertie(data)
+    res.json({
+        "message": "Propertie added"
+    })
+})
+
+
+/*
 app.get('/all', (req, res) => {
     // select all itens from db.properties
-
-    db.all(`SELECT * FROM properties`, function (err, rows) {
-        if (err) {
-            console.log(err)
-            return res.status('404').send('Something go wrong!')
-        }
-        let data = rows
-        console.log(rows)
-        return res.json(data)
-    })
+    const data = queryAll('hello')
+    //console.log(queryAll('hello'))
+    if(data){
+        return res.send(data)
+    }
+    return res.status(404).send('Something go wrong!')
 })
 
 
@@ -62,12 +90,20 @@ app.put('/update/:id', (req, res)=>{
     // Update item in db
 
     let id = req.params.id
+    let data = req.body
+    console.log(data)
 
     if(id){
-
+        let query = `UPDATE properties SET name=?, units>=? WHERE id=?`
+        let values = [data.name, data.units, id]
+        db.run(query, values, function(err){
+            console.log(err)
+            return res.status(404).send('NO')
+        })
+        return res.send('Values updated')
     }
-    
 })
+*/
 
 
 // Server connection

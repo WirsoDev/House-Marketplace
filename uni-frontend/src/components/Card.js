@@ -1,14 +1,29 @@
+import { useState } from 'react/cjs/react.development'
 import './styles/Card.css'
+import { FaRegTrashAlt } from 'react-icons/fa'
+import { FaRegEdit } from 'react-icons/fa'
 
 function Card(props){
+
+    const [isFuncs, setIsFuncs] = useState(false)
+
+    const funcs = ()=>{
+        console.log('hooover')
+        setIsFuncs(isFuncs)
+    }
+
     return(
-        <div className="card-cont">
+        <div className="card-cont" onMouseEnter={()=>{setIsFuncs(true)}} onMouseLeave={()=>{setIsFuncs(false)}}>
+            <div className={isFuncs?"funcs":"hiden"}>
+                <FaRegTrashAlt className="trash"/>
+                <FaRegEdit className="edit"/>
+            </div>
             <div className="image">
-                <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80" alt="back-img" />
+                <img src={props.img} alt="back-img" />
             </div>
             <div className="card-data">
-                <h3>Casa Porto</h3>
-                <p>Quarto, Sala</p>
+                <h3>{props.name}</h3>
+                <p>{props.units}</p>
             </div>
         </div>
     )

@@ -1,0 +1,46 @@
+.modal{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.616);
+    z-index: 99;
+    backdrop-filter: blur(2px);
+    animation: back 350ms;
+}
+
+.modal-cont{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 500px;
+    height: 500px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: open 350ms ease-in-out;
+}
+
+@keyframes open {
+    from{
+        transform: translateY(200px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+
+@keyframes back {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}

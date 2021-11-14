@@ -69,3 +69,19 @@
     cursor: pointer;
 }
 
+.header-filter{
+    font-size: 14px;
+    padding: 9px;
+    color: rgb(175, 175, 175);
+}
+
+.header-filter p{
+    cursor: pointer;
+}
+
+.selected{
+    background-color: black;
+    border-radius: 15px;
+    color: white;
+}
+

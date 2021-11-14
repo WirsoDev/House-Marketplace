@@ -1,7 +1,7 @@
 import Express from 'express'
 const app = Express()
 //import { openDb } from './db.js'
-import { allProperties, addPropertie, updatePropertie, deletePropertie } from './db/models/properties.js'
+import { allProperties, addPropertie, updatePropertie, deletePropertie, PropertiesByUnit } from './db/models/properties.js'
 
 // server config
 app.use(Express.json())
@@ -63,6 +63,24 @@ app.delete('/delete', (req, res)=>{
     res.json({
         "message": "Propertie Deleted"
     })
+})
+
+
+app.get('/byroom', async function (req, res) {
+    // Get all properties by room from db
+    var data = req.body
+    let properties = await PropertiesByUnit(data)
+    console.log(properties)
+    if(properties){
+        return res.json({
+            properties
+        })
+    }
+    return res.status(404).json(
+        {
+            "message": "404"
+        }
+    )
 })
 
 

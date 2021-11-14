@@ -14,11 +14,11 @@ export async function allProperties() {
 }
 
 
-export async function PropertiesByRoom(data) {
+export async function PropertiesByUnit(data) {
     //get by number off rooms
     try {
         return openDb().then(db => {
-            return db.all('SELECT * FROM properties WHERE units LIKE "?"', [data.units]).then(res => res)
+            return db.all('SELECT * FROM properties WHERE units LIKE ?', [`%${data.units}%`]).then(res => res)
         })
     } catch (err) {
         console.log(err)

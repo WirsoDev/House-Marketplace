@@ -1,14 +1,15 @@
 import './App.css';
 import Header from './components/Header'
 import Filter from './components/Filter'
-import Card from './components/Card';
+import Cardlist from './components/Cardlist';
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Filter />
-      <Card />
+      <Cardlist />
+      <div className="back"></div>
     </div>
   );
 }

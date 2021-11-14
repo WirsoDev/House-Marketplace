@@ -1,0 +1,8 @@
+{
+  "short_name": "Uniplaces_wilson",
+  "name": "Uniplaces_wilson",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

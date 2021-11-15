@@ -18,7 +18,7 @@ export async function PropertiesByUnit(data) {
     //get by number off rooms
     try {
         return openDb().then(db => {
-            return db.all('SELECT * FROM properties WHERE units LIKE ?', [`%${data.units}%`]).then(res => res)
+            return db.all('SELECT * FROM properties WHERE units LIKE ?', [`%bedroom ${data.qnt}%`]).then(res => res)
         })
     } catch (err) {
         console.log(err)
@@ -46,9 +46,10 @@ export async function addPropertie(data) {
 
 export async function updatePropertie(data) {
     // update properties
+
     try {
         openDb().then(db => {
-            db.run(`UPDATE properties SET name=?, units=? WHERE ID=?`, [data.name, data.units, data.id])
+            db.run(`UPDATE properties SET name=?, units=?, img=? WHERE ID=?`, [data.name, data.units, data.img, data.id])
         })
     } catch (err) {
         console.log(err)

@@ -64,7 +64,7 @@ app.delete('/delete', (req, res)=>{
 })
 
 
-app.get('/byroom', async function (req, res) {
+app.post('/byroom', async function (req, res) {
     // Get all properties by room from db
     var data = req.body
     let properties = await PropertiesByUnit(data)
@@ -84,5 +84,5 @@ app.get('/byroom', async function (req, res) {
 
 
 // Server connection
-let port = 8000
+let port = 3000
 app.listen(process.env.PORT || port, () => { console.log('Server up at port - ' + port) })

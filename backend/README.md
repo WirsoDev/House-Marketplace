@@ -1,5 +1,8 @@
-# Build with mode.js
-## Express js
+# Build with node.js | express js
+<br>
+
+### Run Server:
+npm install || npm start
 <br>
 <br>
 

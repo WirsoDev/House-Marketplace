@@ -84,5 +84,5 @@ app.get('/byroom', async function (req, res) {
 
 
 // Server connection
-let port = 3000
+let port = 8000
 app.listen(process.env.PORT || port, () => { console.log('Server up at port - ' + port) })

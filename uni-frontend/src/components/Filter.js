@@ -66,13 +66,13 @@ function Header(props) {
                     <h3>All Properties</h3>
                 </div>
                 <div className={isOneSelected ? "header-filter selected" : "header-filter"} onClick={selectHandler} id="1">
-                    <p>1 bed room</p>
+                    <p>1 bedroom</p>
                 </div>
                 <div className={isTwoSelected ? "header-filter selected" : "header-filter"} onClick={selectHandler} id="2">
-                    <p>2 bed rooms</p>
+                    <p>2 bedrooms</p>
                 </div>
                 <div className={isThreeSelected ? "header-filter selected" : "header-filter"} onClick={selectHandler} id="3">
-                    <p>3 bed rooms</p>
+                    <p>3 bedrooms</p>
                 </div>
             </div>
             <div className="search-box-add" onClick={addClick}>

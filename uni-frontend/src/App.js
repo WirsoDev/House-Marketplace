@@ -13,23 +13,24 @@ function App() {
   const [isLoading, setIsLoading] = useState(false)
 
 
-
   useEffect(() => {
+    getAllproperties()
+  }, [])
+
+
+  const getAllproperties = ()=>{
     fetch("http://localhost:3000/all")
       .then(res => res.json())
       .then(
         (result) => {
-          //setIsLoaded(true);
           setProperties(result);
           setIsLoading(true)
         },
         (error) => {
-          //setIsLoaded(true);
           console.log(error);
         }
       )
-      console.log(properties)
-  }, [])
+  }
 
 
   const titlehandler = (e) => {
@@ -42,11 +43,42 @@ function App() {
     console.log(properties.properties)
   }
 
+
+  const filterHandler = (id) => {
+    console.log(id)
+    if(id === 'all'){
+      getAllproperties()
+      return
+    }
+    if(id === '1'){
+      id = ''
+    }
+    fetch('http://localhost:3000/byroom', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "qnt":id
+      })
+    }).then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          setProperties(result)
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+  }
+
+
   return (
     <div className="App">
       <Header title={title} />
-      <Filter titlehandler={titlehandler} />
-      {isLoading?<Cardlist data={properties.properties}/>: <Cardloading/> }
+      <Filter titlehandler={titlehandler} filterHandler={filterHandler} />
+      {isLoading ? <Cardlist data={properties.properties} /> : <Cardloading />}
       <div className="back"></div>
     </div>
   );

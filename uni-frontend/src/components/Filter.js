@@ -4,11 +4,13 @@ import './styles/Modal.css'
 import Modal from './Modal'
 
 
-function Header() {
+function Header(props) {
 
     const [allProp, setAllProp] = useState(true)
     const [modal, setModal] = useState(false)
-    const [isSelected, setIsSelected] = useState(false)
+    const [isOneSelected, setIsOneSelected] = useState(false)
+    const [isTwoSelected, setIsTwoSelected] = useState(false)
+    const [isThreeSelected, setIsThreeSelected] = useState(false)
 
     const AllpropHandler = () => {
         if (allProp) {
@@ -16,21 +18,44 @@ function Header() {
             return
         }
         setAllProp(true)
+        setIsOneSelected(false)
+        setIsTwoSelected(false)
+        setIsThreeSelected(false)
     }
 
-    const addClick = () => {
+    const addClick = (e) => {
         setModal(true)
+        props.titlehandler(e)
     }
 
 
     const closeModal = (e) => {
         if (e.target.className == 'modal') {
             setModal(false)
+            props.titlehandler(e)
         }
     }
 
-    const selectHandler = (e)=>{
-        console.log(e.target)
+    const selectHandler = (e) => {
+        let id = e.currentTarget.id
+        switch (id) {
+            case "1":
+                setIsOneSelected(true)
+                setIsTwoSelected(false)
+                setIsThreeSelected(false)
+                break;
+            case "2":
+                setIsOneSelected(false)
+                setIsTwoSelected(true)
+                setIsThreeSelected(false)
+                break;
+            case "3":
+                setIsOneSelected(false)
+                setIsTwoSelected(false)
+                setIsThreeSelected(true)
+                break;
+        }
+        setAllProp(false)
     }
 
 
@@ -40,13 +65,13 @@ function Header() {
                 <div className={allProp ? "header-props header-all" : "header-props"} onClick={AllpropHandler}>
                     <h3>All Properties</h3>
                 </div>
-                <div className={isSelected ? "header-filter selected":"header-filter"} onClick={selectHandler}>
+                <div className={isOneSelected ? "header-filter selected" : "header-filter"} onClick={selectHandler} id="1">
                     <p>1 bed room</p>
                 </div>
-                <div className={isSelected ? "header-filter selected":"header-filter"}>
+                <div className={isTwoSelected ? "header-filter selected" : "header-filter"} onClick={selectHandler} id="2">
                     <p>2 bed rooms</p>
                 </div>
-                <div className={isSelected ? "header-filter selected":"header-filter"}>
+                <div className={isThreeSelected ? "header-filter selected" : "header-filter"} onClick={selectHandler} id="3">
                     <p>3 bed rooms</p>
                 </div>
             </div>

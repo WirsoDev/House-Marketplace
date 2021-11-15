@@ -32,10 +32,10 @@ export async function addPropertie(data) {
     try {
         openDb().then(db => {
             db.run(
-                `INSERT INTO properties (name, units)
-                 VALUES(?,?)
+                `INSERT INTO properties (name, units, img)
+                 VALUES(?,?,?)
                 `,
-                [data.name, data.units]
+                [data.name, data.units, data.img]
             )
         })
     } catch (err) {

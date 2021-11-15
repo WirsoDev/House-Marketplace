@@ -19,7 +19,7 @@ function Card(props){
                 <FaRegEdit className="edit"/>
             </div>
             <div className="image">
-                <img src={props.img} alt="back-img" />
+                <img src={props.img} alt="back-img"/>
             </div>
             <div className="card-data">
                 <h3>{props.name}</h3>

@@ -1,11 +1,11 @@
 import Express from 'express'
 const app = Express()
-//import { openDb } from './db.js'
+import cors from 'cors'
 import { allProperties, addPropertie, updatePropertie, deletePropertie, PropertiesByUnit } from './db/models/properties.js'
 
 // server config
 app.use(Express.json())
-
+app.use(cors())
 
 // Routes
 

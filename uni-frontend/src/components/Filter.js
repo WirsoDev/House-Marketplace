@@ -30,7 +30,7 @@ function Header(props) {
 
 
     const closeModal = (e) => {
-        if (e.target.className == 'modal') {
+        if (e.target.className === 'modal') {
             setModal(false)
             props.titlehandler(e)
         }

@@ -12,13 +12,6 @@ function App() {
   const [properties, setProperties] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const data =[{
-    "id":2,
-    "name":"cenas",
-    "units":"cozinha"
-  }]
-
-
 
 
   useEffect(() => {
@@ -35,7 +28,8 @@ function App() {
           console.log(error);
         }
       )
-  }, [properties])
+      console.log(properties)
+  }, [])
 
 
   const titlehandler = (e) => {

@@ -58,6 +58,7 @@ export async function updatePropertie(data) {
 
 export async function deletePropertie(data) {
     // delete properties
+    console.log(data)
     try {
         openDb().then(db => {
             db.run(`DELETE FROM properties WHERE ID=?`, [data.id])

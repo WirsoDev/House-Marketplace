@@ -1,4 +1,3 @@
-import Card from './Card'
 import './styles/Cardlist.css'
 
 function Cardloading() {
@@ -8,40 +7,31 @@ function Cardloading() {
                 <div className="image loading">
                 </div>
                 <div className="card-data loading">
-                    <h3></h3>
-                    <p></p>
                 </div>
             </div>
             <div className="card-cont">
                 <div className="image loading">
                 </div>
                 <div className="card-data loading">
-                    <h3></h3>
-                    <p></p>
                 </div>
             </div>
             <div className="card-cont">
                 <div className="image loading">
                 </div>
                 <div className="card-data loading">
-                    <h3></h3>
-                    <p></p>
                 </div>
             </div>
             <div className="card-cont">
                 <div className="image loading">
                 </div>
                 <div className="card-data loading">
-                    <h3></h3>
-                    <p></p>
+
                 </div>
             </div>
             <div className="card-cont">
                 <div className="image loading">
                 </div>
                 <div className="card-data loading">
-                    <h3></h3>
-                    <p></p>
                 </div>
             </div>
         </div>

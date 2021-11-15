@@ -22,11 +22,11 @@ function Modal() {
     })
 
 
-    useEffect(()=>{
+    useEffect(() => {
         // trigger for display image on paste url
-        if(img.length > 0){
+        if (img.length > 0) {
             setIsvalid(true)
-        }else{
+        } else {
             setIsvalid(false)
         }
     }, [img])
@@ -38,7 +38,7 @@ function Modal() {
         setImg(e.target.value)
     }
 
-    const nameHandler = (e)=>{
+    const nameHandler = (e) => {
         setName(e.target.value)
     }
 
@@ -46,14 +46,12 @@ function Modal() {
         isImageURL(img).then((x) => {
             if (x) {
                 setIsvalid(true)
-                console.log(x)
             }
         })
     }
 
     const unitHandler = (e) => {
         var id = e.target.id
-        console.log(e.target)
         if (id) {
             setUnitsQnts({ ...unitsQnt, [id]: unitsQnt[id] + 1 })
         }
@@ -71,34 +69,55 @@ function Modal() {
         setName('')
     }
 
-    const addNewPropertie=()=>{
+    const addNewPropertie = () => {
         // add new properties -- send to server
-        if(name.length > 0){
-            console.log(img.length)
+        if (name.length > 0) {
             let defaultImage = img
-            if(img.length <= 0 || isValid === false){
+            if (img.length <= 0 || isValid === false) {
                 defaultImage = 'https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80'
 
             }
             let units = ObjectToStr(unitsQnt)
             let data = {
-                "name":name,
-                "units":units,
-                "img":defaultImage
+                "name": name,
+                "units": units,
+                "img": defaultImage,
             }
             console.log(data)
+            // send
+
+            fetch('http://localhost:3000/add', {
+                method: 'post',
+                headers: {
+                    'Content-Type':'application/json'
+                  },
+                body: JSON.stringify(data)
+            }).then(res => res.json())
+                .then(
+                    (result) => {
+                        console.log(result)
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                )
+            window.location.reload(true)
         }
     }
 
-    const ObjectToStr = (obj)=>{
+
+    const ObjectToStr = (obj) => {
         let buck = []
         var key, prop = obj
-        for(key in prop){
-            if(prop[key] > 0){
+        for (key in prop) {
+            if (prop[key] > 1) {
                 buck.push(`${key} ${prop[key]}x`)
             }
+            if(prop[key] === 1){
+                buck.push(`${key}`)
+            }
         }
-        return buck.join(' ,')
+        return buck.join(', ')
     }
 
 
@@ -106,11 +125,11 @@ function Modal() {
         <div className="modal-master">
             <div className="modal-cont">
                 <div className="modal-img">
-                    <input type="text" placeholder="Img Url" value={img} onChange={imgHandler} />
+                    <input type="text" placeholder="Paste image url" value={img} onChange={imgHandler} />
                     {isValid ? <img src={img} alt="" /> : null}
                 </div>
                 <div className="modal-data">
-                    <input type="text" placeholder="propertie name" className="input-name" value={name} onChange={nameHandler}/>
+                    <input type="text" placeholder="propertie name" className="input-name" value={name} onChange={nameHandler} />
                     <div className="units" onClick={unitHandler}>
                         <div className="room">
                             <MdOutlineBedroomParent className="room-icon" id="bedroom" />

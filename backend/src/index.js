@@ -36,7 +36,6 @@ app.get('/all', async function (req, res) {
 app.post('/add', (req, res) => {
     //add properties to db
     let data = req.body
-    console.log(data)
     addPropertie(data)
     res.json({
         "message": "Propertie added"
@@ -58,7 +57,6 @@ app.put('/update', (req, res)=>{
 app.delete('/delete', (req, res)=>{
     //Delete properties
     let data = req.body
-    console.log(data)
     deletePropertie(data)
     res.json({
         "message": "Propertie Deleted"

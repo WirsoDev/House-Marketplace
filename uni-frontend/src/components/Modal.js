@@ -83,9 +83,7 @@ function Modal() {
                 "units": units,
                 "img": defaultImage,
             }
-            console.log(data)
             // send
-
             fetch('http://localhost:3000/add', {
                 method: 'post',
                 headers: {

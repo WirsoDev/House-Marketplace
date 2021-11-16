@@ -37,6 +37,8 @@ function Header(props) {
 
     const selectHandler = (e) => {
         let id = e.currentTarget.id
+        // Ignore default case
+        // eslint-disable-next-line
         switch (id) {
             case "2":
                 setIsTwoSelected(true)

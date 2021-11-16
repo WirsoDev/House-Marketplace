@@ -14,11 +14,13 @@ function App() {
 
 
   useEffect(() => {
+    // on load get all properties from server
     getAllproperties()
   }, [])
 
 
   const getAllproperties = ()=>{
+    // on call get all properties from server
     fetch("http://localhost:3000/all")
       .then(res => res.json())
       .then(
@@ -34,7 +36,6 @@ function App() {
 
 
   const titlehandler = (e) => {
-    console.log(e.target.className)
     if (e.target.className === "modal") {
       setTitle('Hello World')
       return
@@ -45,12 +46,12 @@ function App() {
 
 
   const filterHandler = (id) => {
-    console.log(id)
     if(id === 'all'){
       getAllproperties()
       return
     }
     if(id === '1'){
+      // little hack to filter on the server
       id = ''
     }
     fetch('http://localhost:3000/byroom', {

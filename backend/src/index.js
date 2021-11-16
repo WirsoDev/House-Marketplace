@@ -3,12 +3,13 @@ const app = Express()
 import cors from 'cors'
 import { allProperties, addPropertie, updatePropertie, deletePropertie, PropertiesByUnit } from './db/models/properties.js'
 
+
 // server config
 app.use(Express.json())
 app.use(cors())
 
-// Routes
 
+// Routes
 app.get('/', (req, res) => {
     //ping
     res.json({
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
 app.get('/all', async function (req, res) {
     // Get all properties from db
     let properties = await allProperties()
-    if(properties){
+    if (properties) {
         return res.json({
             properties
         })
@@ -43,10 +44,9 @@ app.post('/add', (req, res) => {
 })
 
 
-app.put('/update', (req, res)=>{
+app.put('/update', (req, res) => {
     //update properties
     let data = req.body
-    console.log(data)
     updatePropertie(data)
     res.json({
         "message": "Propertie updated"
@@ -54,7 +54,7 @@ app.put('/update', (req, res)=>{
 })
 
 
-app.delete('/delete', (req, res)=>{
+app.delete('/delete', (req, res) => {
     //Delete properties
     let data = req.body
     deletePropertie(data)
@@ -68,8 +68,7 @@ app.post('/byroom', async function (req, res) {
     // Get all properties by room from db
     var data = req.body
     let properties = await PropertiesByUnit(data)
-    console.log(properties)
-    if(properties){
+    if (properties) {
         return res.json({
             properties
         })
@@ -80,7 +79,6 @@ app.post('/byroom', async function (req, res) {
         }
     )
 })
-
 
 
 // Server connection

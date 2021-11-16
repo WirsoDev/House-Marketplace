@@ -7,24 +7,24 @@ npm install || npm start
 <br>
 
 ### Api endpoints
-### "Running on localhost:8000"
+### "Running on localhost:3000"
 <br>
 
-#### localhost:8000/
+#### localhost:3000/
 ```
 {
     method: GET,
     description: Ping server
 }
 ```
-#### localhost:8000/all
+#### localhost:3000/all
 ```
 {
     method: GET,
     description: Get all properties in db
 }
 ```
-#### localhost:8000/delete
+#### localhost:3000/delete
 ```
 {
     method: DELETE,
@@ -34,7 +34,7 @@ npm install || npm start
     }
 }
 ```
-#### localhost:8000/add
+#### localhost:3000/add
 ```
 {
     method: post,
@@ -46,15 +46,24 @@ npm install || npm start
     }
 }
 ```
-#### localhost:8000/update
+#### localhost:3000/update
 ```
 {
     method: put,
     description: Update propertie by id
-    required body (if) :{
+    required body:{
         name:"name",
         units:"units",
         img:"img"
     }
 }
 ```
+#### localhost:3000/byroom
+```
+{
+    method: post,
+    description: Get properties by number of bedrooms
+    required body:{
+        "qnt":"{number of rooms}"
+    }
+}

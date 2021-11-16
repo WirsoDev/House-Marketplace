@@ -5,7 +5,7 @@ export async function allProperties() {
     //get all properties
     try {
         return openDb().then(db => {
-            return db.all('SELECT * FROM properties').then(res => res)
+            return db.all('SELECT * FROM properties ORDER BY name').then(res => res)
         })
     } catch (err) {
         console.log(err)
@@ -46,7 +46,6 @@ export async function addPropertie(data) {
 
 export async function updatePropertie(data) {
     // update properties
-
     try {
         openDb().then(db => {
             db.run(`UPDATE properties SET name=?, units=?, img=? WHERE ID=?`, [data.name, data.units, data.img, data.id])
@@ -59,7 +58,6 @@ export async function updatePropertie(data) {
 
 export async function deletePropertie(data) {
     // delete properties
-    console.log(data)
     try {
         openDb().then(db => {
             db.run(`DELETE FROM properties WHERE ID=?`, [data.id])

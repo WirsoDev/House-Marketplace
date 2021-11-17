@@ -77,8 +77,48 @@ def update():
 
 
 @app.route('/filterby/<qnt>', methods=['GET'])
-def update(qnt):
-    print(qnt)
-    ####
+def filter_by(qnt):
 
+    if int(qnt) == 0:
+        without_bedrooms = Properties.query.filter(~Properties.units.like("%bedroom%")).all()
+        print(without_bedrooms)
+        data = []
+        for i in without_bedrooms:
+            out = {}
+            out['id'] = i.id
+            out['name'] = i.name
+            out['units'] = i.units
+            out['img'] = i.img
+            data.append(out)
+        return jsonify({"Properties without bedroom":len(data), "data":data})
+
+    with_bedrooms = Properties.query.filter(Properties.units.like("%bedroom%")).all()
+    if with_bedrooms:
+        qnt_bedrooms = []
+        for i in with_bedrooms:
+            # check for qnt / bedrooms
+            units = i.units.split(',')
+            bedrooms = 0
+            for bedroom in units:
+                if bedroom.strip() == 'bedroom':
+                    bedrooms += 1
+            if bedrooms == int(qnt):
+                qnt_bedrooms.append(i)
+                break
+
+    if qnt_bedrooms:
+        data = []
+        for i in qnt_bedrooms:
+            out = {}
+            out['id'] = i.id
+            out['name'] = i.name
+            out['units'] = i.units
+            out['img'] = i.img
+            data.append(out)
+    
+        return jsonify({F"Properties with {qnt} bedrooms":len(data), "data":data})   
+    else:
+        return jsonify({"Message":f"No properties with {qnt} bedrooms"})  
+        
+    return rise_error(500, 'Not able to get data')
 

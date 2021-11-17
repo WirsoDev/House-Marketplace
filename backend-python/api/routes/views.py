@@ -5,6 +5,7 @@ from .errors import rise_error
 
 main_bp = Blueprint('main_bp', __name__)
 
+
 @app.route('/', methods=['GET'])
 def root():
     return jsonify({
@@ -14,7 +15,7 @@ def root():
 
 @app.route('/all', methods=['GET'])
 def all():
-    props = Properties.query.all()
+    props = Properties.query.order_by(Properties.name).all()
     if props:
         data = []
         for i in props:
@@ -34,8 +35,8 @@ def add():
     data = request.get_json()
     if(data):
         new_propertie = Properties(
-            name = data['name'],
-            units = data['units'],
+            name = data['name'].lower(),
+            units = data['units'].lower(),
             img = data['img']
         )
 
@@ -65,23 +66,20 @@ def update():
     if data:
         propertie = Properties.query.filter_by(id=data['id']).first()
         if propertie:
-            propertie.name = data['name'] if 'name' in data else propertie.name
-            propertie.units = data['units'] if 'units' in data else propertie.units
+            propertie.name = data['name'].lower() if 'name' in data else propertie.name
+            propertie.units = data['units'].lower() if 'units' in data else propertie.units
             propertie.img = data['img'] if 'img' in data else propertie.img
             db.session.commit()
             return jsonify({"message":f"Propertie updated!"})
         else:
             return jsonify({"message":f"No propertie with id: {data['id']}"})
-
     return rise_error(404, 'Need body data')
 
 
 @app.route('/filterby/<qnt>', methods=['GET'])
 def filter_by(qnt):
-
     if int(qnt) == 0:
         without_bedrooms = Properties.query.filter(~Properties.units.like("%bedroom%")).all()
-        print(without_bedrooms)
         data = []
         for i in without_bedrooms:
             out = {}
@@ -104,7 +102,7 @@ def filter_by(qnt):
                     bedrooms += 1
             if bedrooms == int(qnt):
                 qnt_bedrooms.append(i)
-                break
+                #break
 
     if qnt_bedrooms:
         data = []
@@ -115,10 +113,8 @@ def filter_by(qnt):
             out['units'] = i.units
             out['img'] = i.img
             data.append(out)
-    
         return jsonify({F"Properties with {qnt} bedrooms":len(data), "data":data})   
     else:
         return jsonify({"Message":f"No properties with {qnt} bedrooms"})  
-        
     return rise_error(500, 'Not able to get data')
 

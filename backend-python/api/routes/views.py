@@ -69,10 +69,16 @@ def update():
             propertie.units = data['units'] if 'units' in data else propertie.units
             propertie.img = data['img'] if 'img' in data else propertie.img
             db.session.commit()
-
             return jsonify({"message":f"Propertie updated!"})
         else:
             return jsonify({"message":f"No propertie with id: {data['id']}"})
 
     return rise_error(404, 'Need body data')
+
+
+@app.route('/filterby/<qnt>', methods=['GET'])
+def update(qnt):
+    print(qnt)
+    ####
+
 

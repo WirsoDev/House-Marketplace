@@ -59,4 +59,20 @@ def remove(id):
     return jsonify({"message":"ID required"})
 
 
+@app.route('/update', methods=['POST'])
+def update():
+    data = request.get_json()
+    if data:
+        propertie = Properties.query.filter_by(id=data['id']).first()
+        if propertie:
+            propertie.name = data['name'] if 'name' in data else propertie.name
+            propertie.units = data['units'] if 'units' in data else propertie.units
+            propertie.img = data['img'] if 'img' in data else propertie.img
+            db.session.commit()
+
+            return jsonify({"message":f"Propertie updated!"})
+        else:
+            return jsonify({"message":f"No propertie with id: {data['id']}"})
+
+    return rise_error(404, 'Need body data')
 

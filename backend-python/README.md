@@ -61,7 +61,7 @@ python main.py
 #### localhost:5000/remove/:id
 ```
 {
-    method: GET,
+    method: DELETE,
     description: Update propertie by id
 }
 ```

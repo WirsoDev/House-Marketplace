@@ -46,7 +46,7 @@ def add():
         return rise_error(404, 'Need body data')
 
 
-@app.route('/remove/<id>', methods=['GET'])
+@app.route('/remove/<id>', methods=['DELETE'])
 def remove(id):
     if id:
         id_exists = Properties.query.filter_by(id=id).first()

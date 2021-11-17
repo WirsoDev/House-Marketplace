@@ -59,7 +59,7 @@ def remove(id):
     return jsonify({"message":"ID required"})
 
 
-@app.route('/update', methods=['POST'])
+@app.route('/update', methods=['PUT'])
 def update():
     data = request.get_json()
     if data:
